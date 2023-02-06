@@ -39,29 +39,29 @@ class Graph(object):
 
     def __init__(self, edges=None, nodes=None):
         if not edges:
-            self.edges = set()
+            self.edges = list()
         else:
             self.edges = edges
         if not nodes:
-            self.nodes = set()
+            self.nodes = list()
         else:
             self.nodes = nodes
 
     def add_edge(self, edge):
         """Adds an edge to the graph."""
-        self.edges.add(edge)
+        self.edges.append(edge)
 
     def clear_edges(self):
         """Clears all the edges from the graph."""
-        self.edges = set()
+        self.edges = list()
 
     def add_node(self, node):
         """Adds a node to graph."""
-        self.nodes.add(node)
+        self.nodes.append(node)
 
     def clear_nodes(self):
         """Clears all the nodes from the graph."""
-        self.nodes = set()
+        self.nodes = list()
         
     def get_nodes(self):
         """returns all the nodes"""
@@ -79,20 +79,21 @@ def generate_diff_graph(first_graph, second_graph):
     added_nodes = set(second_graph.nodes) - set(first_graph.nodes)
     nodes = set(second_graph.nodes) & set(first_graph.nodes)
 
-    removed_edges = first_graph.edges - second_graph.edges
+    removed_edges = set(first_graph.edges) - set(second_graph.edges)
     for removed_edge in removed_edges:
         if removed_edge.src in removed_nodes:
             removed_edge.src = "-" + removed_edge.src
         if removed_edge.dest in removed_nodes:
             removed_edge.dest = "-" + removed_edge.dest
 
-    added_edges = second_graph.edges - first_graph.edges
+    added_edges = set(second_graph.edges) - set(first_graph.edges0
     for added_edge in added_edges:
         if added_edge.src in added_nodes:
             added_edge.src = "+" + added_edge.src
         if added_edge.dest in added_nodes:
             added_edge.dest = "+" + added_edge.dest
-    edges = second_graph.edges & first_graph.edges
+            
+    edges = set(second_graph.edges) & set(first_graph.edges)
 
     graph = Graph()
     for removed_node in removed_nodes:
