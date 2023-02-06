@@ -62,6 +62,14 @@ class Graph(object):
     def clear_nodes(self):
         """Clears all the nodes from the graph."""
         self.nodes = set()
+        
+    def get_nodes(self):
+        """returns all the nodes"""
+        return self.nodes
+    
+    def get_edges(self):
+        """returns all teh edges"""
+        return self.edges
 
 
 def generate_diff_graph(first_graph, second_graph):
